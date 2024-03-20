@@ -23,10 +23,12 @@ public class Main {
             }
 
             if(cmd.equals("article write")){
-                System.out.print("제목 : ");
-                String title = sc.nextLine();
+
                 int id = lastArticleId + 1;
                 lastArticleId = id;
+
+                System.out.print("제목 : ");
+                String title = sc.nextLine();
                 System.out.print("내용 : ");
                 String body = sc.nextLine();
                 System.out.printf("%d번 글이 생성되었습니다.", id);
