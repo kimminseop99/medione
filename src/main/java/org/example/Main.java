@@ -1,8 +1,11 @@
 package org.example;
 import java.util.Scanner;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         int lastArticleId = 0;
         System.out.println("== 프로그램 시작 ==");
@@ -41,7 +44,7 @@ public class Main {
                 System.out.printf("%s(은)는 존재하지 않는 명령어 입니다.\n", cmd);
             }
         }
-
+        sc.close();
         System.out.println("== 프로그램 끝 ==");
 
     }
