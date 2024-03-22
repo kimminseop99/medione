@@ -29,6 +29,7 @@ public class ArticleController extends Controller {
             case "detail" : showDetail(); break;
             case "modify" : doModify(); break;
             case "delete" : doDelete(); break;
+            default: System.out.println("존재하지 않는 명령어 입니다."); break;
         }
     }
 
