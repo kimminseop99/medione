@@ -29,7 +29,13 @@ public class MemberController extends Controller{
             default: System.out.println("존재하지 않는 명령어 입니다."); break;
         }
     }
+    public void makeTestData() {
+        System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
+        members.add(new Member(1,Util.getNowDateStr(), "admin", "admin", "관리자"));
+        members.add(new Member(2,Util.getNowDateStr(), "아이디1", "비밀번호1", "이름1"));
+        members.add(new Member(3,Util.getNowDateStr(), "아이디2", "비밀번호2", "이름2"));
+    }
     public void doJoin() {
         int id = members.size() + 1;
         String regDate = Util.getNowDateStr();
@@ -124,6 +130,8 @@ public class MemberController extends Controller{
         }
         return members.get(index);
     }
+
+
 }
 
 
