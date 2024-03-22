@@ -13,7 +13,7 @@ public class MemberController extends Controller{
     private String cmd;
     private String actionMethodName;
 
-    private Member loginedMember;
+
     public MemberController(Scanner sc) {
         this.sc = sc;
         members = new ArrayList<>();
@@ -105,9 +105,7 @@ public class MemberController extends Controller{
         System.out.printf("로그인 되었습니다 %s님 환영합니다!\n", loginedMember.name);
     }
 
-    private boolean isLogined(){
-        return loginedMember != null;
-    }
+
     private void doLogout() {
         if(isLogined() == false){
             System.out.println("로그인 상태가 아닙니다.");
