@@ -24,7 +24,7 @@ public class ArticleController extends Controller {
         this.actionMethodName = actionMethodName;
 
         switch (actionMethodName){
-            case "write": if(isLogined() == false){System.out.println("로그인 후 이용해주세요"); break;}doWrite(); break;
+            case "write": doWrite(); break;
             case "list" : showList(); break;
             case "detail" :showDetail(); break;
             case "modify" : doModify(); break;
