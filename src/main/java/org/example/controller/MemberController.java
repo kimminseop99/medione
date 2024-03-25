@@ -2,21 +2,21 @@ package org.example.controller;
 
 import org.example.Container;
 import org.example.dto.Member;
+import org.example.service.MemberService;
 import org.example.util.Util;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class MemberController extends Controller{
     private Scanner sc;
-    private List<Member> members;
+
     private String cmd;
     private String actionMethodName;
-
+    private MemberService memberService;
 
     public MemberController(Scanner sc) {
         this.sc = sc;
-        members = Container.memberDao.members;
+        memberService = Container.memberService;
     }
 
     public void doAction(String cmd, String actionMethodName){
@@ -36,9 +36,9 @@ public class MemberController extends Controller{
     public void makeTestData() {
         System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
-        Container.memberDao.add(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "admin", "admin", "관리자"));
-        Container.memberDao.add(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디1", "비밀번호1", "이름1"));
-        Container.memberDao.add(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디2", "비밀번호2", "이름2"));
+        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "admin", "admin", "관리자"));
+        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디1", "비밀번호1", "이름1"));
+        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디2", "비밀번호2", "이름2"));
     }
     public void doJoin() {
         int id = Container.memberDao.getNewId();
@@ -71,11 +71,11 @@ public class MemberController extends Controller{
             }
             break;
         }
-        System.out.printf("이름 : ");
+        System.out.print("이름 : ");
         String name = sc.nextLine();
 
         Member member = new Member(id, regDate, loginId, loginPw, name);
-        Container.memberDao.add(member);
+        memberService.join(member);
 
         System.out.printf("%d번 회원이 생성되었습니다!!\n", id);
     }
@@ -86,7 +86,7 @@ public class MemberController extends Controller{
         System.out.print("비밀번호 : ");
         String loginPw = sc.nextLine();
 
-        Member member = getMemberByLoginId(loginId);
+        Member member = memberService.getMemberByLoginId(loginId);
 
         if(member == null){
             System.out.println("해당회원은 존재하지 않습니다.");
@@ -111,34 +111,13 @@ public class MemberController extends Controller{
 
 
     private boolean isJoinableLoginId(String loginId) {
-        int index = getMemberIndexByLoginId(loginId);
+        int index = memberService.getMemberIndexByLoginId(loginId);
 
         if(index == -1){
             return true;
         }
 
         return false;
-    }
-
-    private int getMemberIndexByLoginId(String loginId) {
-        int i = 0;
-
-        for ( Member member : members ) {
-            if ( member.loginId.equals(loginId) ) {
-                return i;
-            }
-            i++;
-        }
-
-        return -1;
-    }
-    private Member getMemberByLoginId(String loginId) {
-        int index = getMemberIndexByLoginId(loginId);
-
-        if(index == -1){
-            return null;
-        }
-        return members.get(index);
     }
 
 
