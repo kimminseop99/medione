@@ -36,9 +36,9 @@ public class MemberController extends Controller{
     public void makeTestData() {
         System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
-        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "admin", "admin", "관리자"));
-        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디1", "비밀번호1", "이름1"));
-        Container.memberDao.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디2", "비밀번호2", "이름2"));
+        memberService.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "admin", "admin", "관리자"));
+        memberService.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디1", "비밀번호1", "이름1"));
+        memberService.join(new Member(Container.memberDao.getNewId(),Util.getNowDateStr(), "아이디2", "비밀번호2", "이름2"));
     }
     public void doJoin() {
         int id = Container.memberDao.getNewId();
@@ -49,7 +49,7 @@ public class MemberController extends Controller{
             System.out.printf("아이디 : ");
             loginId = sc.nextLine();
 
-            if(isJoinableLoginId(loginId) == false){
+            if(!isJoinableLoginId(loginId)){
                 System.out.printf("%s(은)는 이미 사용중인 아이디 입니다.\n", loginId);
                 continue;
             }
