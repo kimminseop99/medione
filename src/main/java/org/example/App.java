@@ -5,19 +5,22 @@ import org.example.controller.ArticleController;
 import org.example.controller.Controller;
 import org.example.controller.ExportController;
 import org.example.controller.MemberController;
-import org.example.dto.Article;
+import org.example.db.DBConnection;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private List<Article> articles;
-    App() {
-        articles = new ArrayList<>();
+    public App() {
+        DBConnection.DB_NAME = "sbs_proj";
+        DBConnection.DB_USER = "sbsst";
+        DBConnection.DB_PASSWORD = "sbs123414";
+        DBConnection.DB_PORT = 3306;
+
+        Container.getDBConnection().connect();
     }
     public void start() {
         System.out.println("== 프로그램 시작 ==");
+
         Scanner sc = new Scanner(System.in);
 
         MemberController memberController = new MemberController(sc);
@@ -32,7 +35,7 @@ public class App {
             String cmd = sc.nextLine();
             cmd = cmd.trim();
 
-            if (cmd.isEmpty()) {
+            if ( cmd.length() == 0 ) {
                 continue;
             }
 
@@ -42,47 +45,49 @@ public class App {
 
             String[] cmdBits = cmd.split(" "); // article write / member join
 
-            if(cmdBits.length == 1){
+            if ( cmdBits.length == 1 ) {
                 System.out.println("존재하지 않는 명령어 입니다.");
                 continue;
             }
-            String controllerName = cmdBits[0];  // article / member
-            String actionMethodName = cmdBits[1]; // write / list
+
+            String controllerName = cmdBits[0]; // article / member
+            String actionMethodName = cmdBits[1]; // write / join
 
             Controller controller = null;
 
-            if(controllerName.equals("article")){
+            if ( controllerName.equals("article") ) {
                 controller = articleController;
-            }else if(controllerName.equals("member")){
+            }
+            else if ( controllerName.equals("member") ) {
                 controller = memberController;
             }
-            else if(controllerName.equals("export")){
+            else if ( controllerName.equals("export") ) {
                 controller = exportController;
             }
-            else{
+            else {
                 System.out.println("존재하지 않는 명령어입니다.");
                 continue;
             }
 
-            String actionName = controllerName + "/"  + actionMethodName;
+            String actionName = controllerName + "/" + actionMethodName;
 
-            switch (actionName){
+            switch ( actionName ) {
                 case "article/write":
                 case "article/delete":
                 case "article/modify":
-                case "member/logout":
-                    if(!Container.getSession().isLogined()){
-                        System.out.println("로그인 후 이용해주세요");
+                case "memeber/logout":
+                    if ( Container.getSession().isLogined() == false ) {
+                        System.out.println("로그인 후 이용해주세요.");
                         continue;
                     }
                     break;
             }
 
-            switch (actionName){
+            switch ( actionName ) {
                 case "member/login":
-                case "member/join":
-                    if(Container.getSession().isLogined()){
-                        System.out.println("로그아웃 후 이용해주세요");
+                case "memeber/join":
+                    if (Container.getSession().isLogined() ) {
+                        System.out.println("로그아웃 후 이용해주세요.");
                         continue;
                     }
                     break;
@@ -94,8 +99,4 @@ public class App {
         sc.close();
         System.out.println("== 프로그램 끝 ==");
     }
-
-
-
 }
-
