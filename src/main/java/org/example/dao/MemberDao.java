@@ -1,15 +1,21 @@
 package org.example.dao;
 
+import org.example.container.Container;
+import org.example.db.DBConnection;
 import org.example.dto.Member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MemberDao extends Dao {
     public List<Member> members;
 
+    private DBConnection dbConnection;
+
     public MemberDao(){
         members = new ArrayList<>();
+        dbConnection = Container.getDBConnection();
     }
 
     public void join(Member member) {
@@ -30,12 +36,14 @@ public class MemberDao extends Dao {
         return -1;
     }
    public Member getMemberByLoginId(String loginId) {
-        int index = getMemberIndexByLoginId(loginId);
+        StringBuilder sb = new StringBuilder();
 
-        if(index == -1){
-            return null;
-        }
-        return members.get(index);
+        sb.append(String.format("SELECT * "));
+        sb.append(String.format("FROM `member` "));
+        sb.append(String.format("WHERE loginId = '%s' ", loginId));
+
+       Map<String, Object> memberRow = dbConnection.selectRow((sb.toString()));
+        return new Member(memberRow);
     }
 
 

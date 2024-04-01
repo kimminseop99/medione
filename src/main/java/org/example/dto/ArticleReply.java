@@ -9,4 +9,6 @@ public class ArticleReply extends Dto{
     private int articleId;
     private int memberId;
     private String body;
+
+
 }
