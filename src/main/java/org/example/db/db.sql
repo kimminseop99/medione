@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS sbs_proj;
 CREATE DATABASE sbs_proj;
 USE sbs_proj;
 
-CREATE TABLE article(
+CREATE TABLE article (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
@@ -39,7 +39,7 @@ boardId = 2;
 
 SELECT * FROM article;
 
-CREATE TABLE articleReply(
+CREATE TABLE articleReply (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
@@ -48,21 +48,6 @@ CREATE TABLE articleReply(
 	articleId INT(10) UNSIGNED NOT NULL,
 	INDEX articleId(`articleId`)
 );
-
-
-INSERT INTO `board`
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'notice',
-`name` = '공지';
-
-INSERT INTO `board`
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'free',
-`name` = '자유';
-
-SELECT * FROM board;
 
 INSERT INTO articleReply
 SET regDate = NOW(),
@@ -80,7 +65,7 @@ articleId = 1;
 
 SELECT * FROM articleReply;
 
-CREATE TABLE `member`(
+CREATE TABLE `member` (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
 	updateDate DATETIME NOT NULL,
@@ -96,14 +81,12 @@ loginId = 'admin',
 loginPw = 'admin',
 `name` = '관리자';
 
-
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
 loginPw = 'user1',
 `name` = '유저1';
-
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -113,3 +96,25 @@ loginPw = 'user2',
 `name` = '유저2';
 
 SELECT * FROM `member`;
+
+CREATE TABLE board (
+	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	`code` CHAR(100) NOT NULL UNIQUE, # free/notice
+	`name` CHAR(100) NOT NULL # 자유/공지
+);
+
+INSERT INTO `board`
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'notice',
+`name` = '공지';
+
+INSERT INTO `board`
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free',
+`name` = '자유';
+
+SELECT * FROM board;

@@ -53,7 +53,7 @@ public class ArticleController extends Controller {
         int memberId = session.getLoginedMember().getId();
         int boardId = session.getCurrentBoard().getId();
 
-        int newId = articleService.add(memberId, boardId, title, body);
+        int newId = articleService.write(memberId, boardId, title, body);
 
 
         System.out.printf("%d번 게시물이 생성되었습니다.\n", newId);
@@ -86,7 +86,7 @@ public class ArticleController extends Controller {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]); // "1" => 1
 
-        Article foundArticle = articleService.getArticleById(id);
+        Article foundArticle = articleService.getForPrintArticle(id);
 
         if ( foundArticle == null ) {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);

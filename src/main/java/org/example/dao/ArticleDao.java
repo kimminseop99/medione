@@ -18,18 +18,36 @@ public class ArticleDao extends Dao {
         dbConnection = Container.getDBConnection();
     }
 
-    public int add(Article article) {
+    public int write(Article article) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("INSERT INTO article"));
+        sb.append(String.format("INSERT INTO article "));
         sb.append(String.format("SET regDate = NOW(), "));
         sb.append(String.format("updateDate = NOW(), "));
         sb.append(String.format("title = '%s', ", article.title));
         sb.append(String.format("`body` = '%s', ", article.body));
         sb.append(String.format("memberId = %d, ", article.memberId));
-        sb.append(String.format("boardId = %d, ", article.boardId));
+        sb.append(String.format("boardId = %d ", article.boardId));
 
         return dbConnection.insert(sb.toString());
+    }
+
+    public Article getForPrintArticle(int id) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("SELECT A.*, M.name AS writerName "));
+        sb.append(String.format("FROM article AS A "));
+        sb.append(String.format("INNER JOIN `member` AS M "));
+        sb.append(String.format("ON A.memberId = M.id "));
+        sb.append(String.format("WHERE A.id = %d ", id));
+
+        Map<String, Object> row = dbConnection.selectRow(sb.toString());
+
+        if ( row.isEmpty() ) {
+            return null;
+        }
+
+        return new Article(row);
     }
 
     public List<Article> getArticles() {
@@ -105,4 +123,6 @@ public class ArticleDao extends Dao {
 
         return new Board(row);
     }
+
+
 }

@@ -33,9 +33,9 @@ public class ArticleService {
         articleDao.remove(foundArticle);
     }
 
-    public int add(int memberId, int boardId, String title,String body) {
+    public int write(int memberId, int boardId, String title,String body) {
         Article article = new Article(memberId, boardId, title,body);
-        return articleDao.add(article);
+        return articleDao.write(article);
 
     }
 
@@ -45,5 +45,9 @@ public class ArticleService {
 
     public Board getBoard(int id){
         return articleDao.getBoard(id);
+    }
+
+    public Article getForPrintArticle(int id) {
+        return articleDao.getForPrintArticle(id);
     }
 }

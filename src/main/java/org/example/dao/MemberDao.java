@@ -10,10 +10,9 @@ import java.util.Map;
 
 public class MemberDao extends Dao {
     public List<Member> members;
-
     private DBConnection dbConnection;
 
-    public MemberDao(){
+    public MemberDao() {
         members = new ArrayList<>();
         dbConnection = Container.getDBConnection();
     }
@@ -31,17 +30,16 @@ public class MemberDao extends Dao {
         return dbConnection.insert(sb.toString());
     }
 
-   public Member getMemberByLoginId(String loginId) {
+
+    public Member getMemberByLoginId(String loginId) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT * "));
         sb.append(String.format("FROM `member` "));
         sb.append(String.format("WHERE loginId = '%s' ", loginId));
 
-       Map<String, Object> memberRow = dbConnection.selectRow((sb.toString()));
+        Map<String, Object> memberRow = dbConnection.selectRow((sb.toString()));
+
         return new Member(memberRow);
     }
-
-
-
 }
