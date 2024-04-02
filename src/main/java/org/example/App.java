@@ -7,8 +7,6 @@ import org.example.controller.ExportController;
 import org.example.controller.MemberController;
 import org.example.db.DBConnection;
 
-import java.util.Scanner;
-
 public class App {
     public App() {
         DBConnection.DB_NAME = "sbs_proj";
@@ -23,19 +21,23 @@ public class App {
     }
     public void start() {
         System.out.println("== 프로그램 시작 ==");
+        System.out.println("= 명령어 모음 =");
+        System.out.println("1. 회원가입 : member join");
+        System.out.println("2. 로그인/로그아웃 : member login/logout");
+        System.out.println("3. 현재 게시판 확인 : article currentBoard");
+        System.out.println("4. 게시판 변경 : article changeBoard");
+        System.out.println("5. 게시물 리스트 : article list");
+        System.out.println("6. 게시물 상세 : article detail [게시물 번호]");
+        System.out.println("7. 게시물 작성(로그인 후 이용가능) : article write");
+        System.out.println("8. 게시물 수정/삭제(로그인 후 이용가능) : article modify/delete [게시물 번호]");
 
-        Scanner sc = new Scanner(System.in);
-
-        MemberController memberController = new MemberController(sc);
-        ArticleController articleController = new ArticleController(sc);
-        ExportController exportController = new ExportController(sc);
-
-       // articleController.makeTestData();
-       // memberController.makeTestData();
+        MemberController memberController = new MemberController();
+        ArticleController articleController = new ArticleController();
+        ExportController exportController = new ExportController();
 
         while ( true ) {
             System.out.printf("명령어) ");
-            String cmd = sc.nextLine();
+            String cmd = Container.getScanner().nextLine();
             cmd = cmd.trim();
 
             if ( cmd.length() == 0 ) {
@@ -98,8 +100,9 @@ public class App {
 
             controller.doAction(cmd, actionMethodName);
         }
+        Container.getDBConnection().close();
+        Container.getScanner().close();
 
-        sc.close();
         System.out.println("== 프로그램 끝 ==");
     }
 }
