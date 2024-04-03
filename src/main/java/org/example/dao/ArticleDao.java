@@ -25,7 +25,7 @@ public class ArticleDao extends Dao {
         sb.append(String.format("title = '%s', ", article.title));
         sb.append(String.format("`body` = '%s', ", article.body));
         sb.append(String.format("memberId = %d, ", article.memberId));
-        sb.append(String.format("boardId = %d ", article.boardId));
+        sb.append(String.format("boardId = %d, ", article.boardId));
         sb.append(String.format("hit = %d ", article.hit));
 
         return dbConnection.insert(sb.toString());
@@ -79,8 +79,27 @@ public class ArticleDao extends Dao {
         return new Article(row);
     }
 
-    public List<Article> getForPrintArticles(String searchKeyword) {
-        return null;
+    public List<Article> getForPrintArticles(String boardCode, String searchKeyword) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("SELECT A.* "));
+        sb.append(String.format("FROM `article` AS A "));
+        sb.append(String.format("INNER JOIN `board` AS B "));
+        sb.append(String.format("ON A.boardId = B.id "));
+        sb.append(String.format("WHERE B.`code` = '%s' ", boardCode));
+        if ( searchKeyword.length() > 0 ) {
+            sb.append(String.format("AND A.title LIKE '%%%s%%' ", searchKeyword));
+        }
+        sb.append(String.format("ORDER BY A.id DESC"));
+
+        List<Article> articles = new ArrayList<>();
+        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+        for ( Map<String, Object> row : rows ) {
+            articles.add(new Article((row)));
+        }
+
+        return articles;
     }
 
     public Board getBoard(int id) {

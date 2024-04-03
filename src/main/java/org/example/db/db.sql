@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS sbs_proj;
 CREATE DATABASE sbs_proj;
 USE sbs_proj;
 
+
 CREATE TABLE article (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	regDate DATETIME NOT NULL,
@@ -10,8 +11,10 @@ CREATE TABLE article (
 	`body` TEXT NOT NULL,
 	memberId INT(10) UNSIGNED NOT NULL,
 	boardId INT(10) UNSIGNED NOT NULL,
-	INDEX boardId(`boardId`)
+	INDEX boardId(`boardId`),
+	hit INT(10) UNSIGNED NOT NULL
 );
+
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -19,7 +22,8 @@ updateDate = NOW(),
 title = '제목1',
 `body` = '내용1',
 memberId = 1,
-boardId = 1;
+boardId = 1,
+hit = 1;
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -27,7 +31,8 @@ updateDate = NOW(),
 title = '제목2',
 `body` = '내용2',
 memberId = 2,
-boardId = 1;
+boardId = 1,
+hit = 3;
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -35,7 +40,8 @@ updateDate = NOW(),
 title = '제목3',
 `body` = '내용3',
 memberId = 2,
-boardId = 2;
+boardId = 2,
+hit = 4;
 
 SELECT * FROM article;
 
