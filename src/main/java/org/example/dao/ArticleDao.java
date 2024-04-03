@@ -25,7 +25,7 @@ public class ArticleDao extends Dao {
         sb.append(String.format("title = '%s', ", article.title));
         sb.append(String.format("`body` = '%s', ", article.body));
         sb.append(String.format("memberId = %d, ", article.memberId));
-        sb.append(String.format("boardId = %d, ", article.boardId));
+        sb.append(String.format("boardId = %d ", article.boardId));
         sb.append(String.format("hit = %d ", article.hit));
 
         return dbConnection.insert(sb.toString());
