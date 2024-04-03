@@ -4,8 +4,6 @@ import org.example.container.Container;
 import org.example.dao.ArticleDao;
 import org.example.dto.Article;
 import org.example.dto.Board;
-
-
 import java.util.List;
 
 public class ArticleService {
@@ -47,7 +45,6 @@ public class ArticleService {
     public void modify(int id, String title, String body) {
         articleDao.modify(id, title, body);
     }
-
 
     public void delete(int id) {
         articleDao.delete(id);

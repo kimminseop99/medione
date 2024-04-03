@@ -83,7 +83,6 @@ public class ArticleDao extends Dao {
         return null;
     }
 
-
     public Board getBoard(int id) {
         StringBuilder sb = new StringBuilder();
 

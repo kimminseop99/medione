@@ -4,7 +4,8 @@ import org.example.container.Container;
 import org.example.db.DBConnection;
 import org.example.dto.Member;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MemberDao extends Dao {
@@ -26,7 +27,6 @@ public class MemberDao extends Dao {
 
         return dbConnection.insert(sb.toString());
     }
-
 
     public Member getMemberByLoginId(String loginId) {
         StringBuilder sb = new StringBuilder();

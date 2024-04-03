@@ -16,8 +16,8 @@ public class App {
 
         Container.getDBConnection().connect();
 
-        //현재 게시판을 1번 게시판으로 선택
-        Container.getSession().setCurrentBoard(Container.articleService.getBoard(1));
+        // 현재 게시판을 1번 게시판으로 선택
+        Container.getSession().setCurrentBoard(Container.articleService.getBoard(2));
     }
     public void start() {
         System.out.println("== 프로그램 시작 ==");
@@ -80,7 +80,7 @@ public class App {
                 case "article/write":
                 case "article/delete":
                 case "article/modify":
-                case "memeber/logout":
+                case "member/logout":
                     if ( Container.getSession().isLogined() == false ) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;
@@ -90,7 +90,7 @@ public class App {
 
             switch ( actionName ) {
                 case "member/login":
-                case "memeber/join":
+                case "member/join":
                     if (Container.getSession().isLogined() ) {
                         System.out.println("로그아웃 후 이용해주세요.");
                         continue;
@@ -100,6 +100,7 @@ public class App {
 
             controller.doAction(cmd, actionMethodName);
         }
+
         Container.getDBConnection().close();
         Container.getScanner().close();
 

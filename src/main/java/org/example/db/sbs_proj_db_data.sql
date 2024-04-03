@@ -35,9 +35,9 @@ CREATE TABLE `article` (
 /*Data for the table `article` */
 
 insert  into `article`(`id`,`regDate`,`updateDate`,`title`,`body`,`memberId`,`boardId`) values 
-(1,'2024-04-01 16:35:25','2024-04-01 16:35:25','제목1','내용1',1,1),
-(2,'2024-04-01 16:35:25','2024-04-01 16:35:25','제목2','내용2',2,1),
-(3,'2024-04-01 16:35:25','2024-04-01 16:35:25','제목3','내용3',2,2);
+(1,'2024-04-01 17:19:39','2024-04-01 17:19:39','제목1','내용1',1,1),
+(2,'2024-04-01 17:19:39','2024-04-01 17:19:39','제목2','내용2',2,1),
+(3,'2024-04-01 17:19:39','2024-04-01 17:19:39','제목3','내용3',2,2);
 
 /*Table structure for table `articleReply` */
 
@@ -56,9 +56,9 @@ CREATE TABLE `articleReply` (
 
 /*Data for the table `articleReply` */
 
-insert  into `articleReply`(`id`,`regDate`,`updateDate`,`body`,`memberId`,`articleId`) values 
-(1,'2024-04-01 17:16:47','2024-04-01 17:16:47','댓글1',1,2),
-(2,'2024-04-01 17:16:47','2024-04-01 17:16:47','댓글2',2,1);
+insert  into `articleReply`(`id`,`regDate`,`updateDate`,`body`,`memberId`,`articleId`) values
+(1,'2024-04-01 17:19:39','2024-04-01 17:19:39','댓글1',1,2),
+(2,'2024-04-01 17:19:39','2024-04-01 17:19:39','댓글2',2,1);
 
 /*Table structure for table `board` */
 
@@ -76,9 +76,9 @@ CREATE TABLE `board` (
 
 /*Data for the table `board` */
 
-insert  into `board`(`id`,`regDate`,`updateDate`,`code`,`name`) values 
-(1,'2024-04-01 17:15:03','2024-04-01 17:15:03','notice','공지'),
-(2,'2024-04-01 17:15:03','2024-04-01 17:15:03','free','자유');
+insert  into `board`(`id`,`regDate`,`updateDate`,`code`,`name`) values
+(1,'2024-04-01 17:19:39','2024-04-01 17:19:39','notice','공지'),
+(2,'2024-04-01 17:19:39','2024-04-01 17:19:39','free','자유');
 
 /*Table structure for table `member` */
 
@@ -97,10 +97,10 @@ CREATE TABLE `member` (
 
 /*Data for the table `member` */
 
-insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`name`) values 
-(1,'2024-04-01 17:18:53','2024-04-01 17:18:53','admin','admin','관리자'),
-(2,'2024-04-01 17:18:53','2024-04-01 17:18:53','user1','user1','유저1'),
-(3,'2024-04-01 17:18:53','2024-04-01 17:18:53','user2','user2','유저2');
+insert  into `member`(`id`,`regDate`,`updateDate`,`loginId`,`loginPw`,`name`) values
+(1,'2024-04-01 17:19:39','2024-04-01 17:19:39','admin','admin','관리자'),
+(2,'2024-04-01 17:19:39','2024-04-01 17:19:39','user1','user1','유저1'),
+(3,'2024-04-01 17:19:39','2024-04-01 17:19:39','user2','user2','유저2');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
