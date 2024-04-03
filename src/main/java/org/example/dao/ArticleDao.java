@@ -141,7 +141,7 @@ public class ArticleDao extends Dao {
         return dbConnection.delete(sb.toString());
     }
 
-    // 댓글 -------------------------------------------------------
+    // 댓글 =======================================
 
     public int replyWrite(int articleId, int memberId, String replyBody) {
         StringBuilder sb = new StringBuilder();
@@ -153,18 +153,17 @@ public class ArticleDao extends Dao {
         sb.append(String.format("memberId = %d, ", memberId));
         sb.append(String.format("articleId = %d ", articleId));
 
-
         return dbConnection.insert(sb.toString());
     }
 
-    public List<ArticleReply> getForPrintArticles(int articleId) {
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("SELECT R.* "));
         sb.append(String.format("FROM `articleReply` AS R "));
         sb.append(String.format("INNER JOIN `article` AS A "));
         sb.append(String.format("ON R.articleId = A.id "));
-        sb.append(String.format("WHERE R.articleId = '%d' ", articleId));
+        sb.append(String.format("WHERE R.articleId = %d ", articleId));
         sb.append(String.format("ORDER BY R.id DESC"));
 
         List<ArticleReply> articleReplies = new ArrayList<>();

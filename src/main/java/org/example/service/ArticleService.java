@@ -18,7 +18,6 @@ public class ArticleService {
         return articleDao.getForPrintArticles(boardCode, searchKeyword);
     }
 
-
     public int write(int memberId, int boardId, String title, String body) {
         Article article = new Article(memberId, boardId, title, body);
         return articleDao.write(article);
@@ -48,13 +47,13 @@ public class ArticleService {
         articleDao.delete(id);
     }
 
+    // 댓글 =======================================
 
-    // 댓글 코드 -----------------------------------------------------
     public int replyWrite(int articleId, int memberId, String replyBody) {
         return articleDao.replyWrite(articleId, memberId, replyBody);
     }
 
-    public List<ArticleReply> getForPrintArticles(int articleId) {
-        return articleDao.getForPrintArticles(articleId);
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
+        return articleDao.getForPrintArticleReplies(articleId);
     }
 }
