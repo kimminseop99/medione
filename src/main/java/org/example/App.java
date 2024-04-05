@@ -7,7 +7,26 @@ import org.example.controller.ExportController;
 import org.example.controller.MemberController;
 import org.example.db.DBConnection;
 
+
+
 public class App {
+    public static final String RESET = "\u001B[0m";
+    public static final String FONT_BLACK = "\u001B[30m";
+    public static final String FONT_RED = "\u001B[31m";
+    public static final String FONT_GREEN = "\u001B[32m";
+    public static final String FONT_YELLOW = "\u001B[33m";
+    public static final String FONT_BLUE = "\u001B[34m";
+    public static final String FONT_PURPLE = "\u001B[35m";
+    public static final String FONT_CYAN = "\u001B[36m";
+    public static final String FONT_WHITE = "\u001B[37m";
+    public static final String BACKGROUND_BLACK = "\u001B[40m";
+    public static final String BACKGROUND_RED = "\u001B[41m";
+    public static final String BACKGROUND_GREEN = "\u001B[42m";
+    public static final String BACKGROUND_YELLOW = "\u001B[43m";
+    public static final String BACKGROUND_BLUE = "\u001B[44m";
+    public static final String BACKGROUND_PURPLE = "\u001B[45m";
+    public static final String BACKGROUND_CYAN = "\u001B[46m";
+    public static final String BACKGROUND_WHITE = "\u001B[47m";
     public App() {
         DBConnection.DB_NAME = "sbs_proj";
         DBConnection.DB_USER = "sbsst";
@@ -20,27 +39,28 @@ public class App {
         Container.getSession().setCurrentBoard(Container.articleService.getBoard(2));
     }
     public void start() {
-        System.out.println("== 프로그램 시작 ==");
-        System.out.println("= 명령어 모음 =");
-        System.out.println("1. 회원가입 : member join");
-        System.out.println("2. 로그인/로그아웃 : member login/logout");
-        System.out.println("3. 현재 게시판 확인 : article currentBoard");
-        System.out.println("4. 게시판 변경 : article changeBoard");
-        System.out.println("5. 게시물 리스트 : article list");
-        System.out.println("6. 게시물 상세 : article detail");
-        System.out.println("7. 게시물 작성(로그인 후 이용가능) : article write");
-        System.out.println("8. 게시물 수정/삭제(로그인 후 이용가능) : article modify/delete");
+
+    System.out.println(FONT_CYAN + "== 프로그램 시작 ==" + RESET);
+        System.out.println( "= 명령어 모음 =" );
+        System.out.println(FONT_BLUE +"1. 회원가입 : member join" + RESET );
+        System.out.println(FONT_BLUE +"2. 로그인/로그아웃 : member login/logout" + RESET );
+        System.out.println(FONT_BLUE +"3. 현재 게시판 확인 : article currentBoard" + RESET );
+        System.out.println(FONT_BLUE +"4. 게시판 변경 : article changeBoard" + RESET );
+        System.out.println(FONT_BLUE +"5. 게시물 리스트 : article list" + RESET );
+        System.out.println(FONT_BLUE +"6. 게시물 상세 : article detail" + RESET );
+        System.out.println(FONT_BLUE +"7. 게시물 작성(로그인 후 이용가능) : article write" + RESET );
+        System.out.println(FONT_BLUE +"8. 게시물 수정/삭제(로그인 후 이용가능) : article modify/delete" + RESET );
 
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
         ExportController exportController = new ExportController();
 
         while ( true ) {
-            System.out.printf("명령어) ");
+            System.out.print(FONT_GREEN + "명령어) "+ RESET);
             String cmd = Container.getScanner().nextLine();
             cmd = cmd.trim();
 
-            if ( cmd.length() == 0 ) {
+            if (cmd.isEmpty()) {
                 continue;
             }
 
@@ -81,7 +101,7 @@ public class App {
                 case "article/delete":
                 case "article/modify":
                 case "member/logout":
-                    if ( Container.getSession().isLogined() == false ) {
+                    if (!Container.getSession().isLogined()) {
                         System.out.println("로그인 후 이용해주세요.");
                         continue;
                     }
