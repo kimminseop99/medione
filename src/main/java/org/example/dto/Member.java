@@ -14,11 +14,10 @@ public class Member extends Dto {
     public String loginPw;
     public String name;
 
-    public Member(Map<String, Object> row){
+    public Member(Map<String, Object> row) {
         super(row);
         this.loginId = (String) row.get("loginId");
         this.loginPw = (String) row.get("loginPw");
         this.name = (String) row.get("name");
     }
 }
-

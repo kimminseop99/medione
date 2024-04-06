@@ -1,6 +1,5 @@
 package org.example.service;
 
-
 import org.example.container.Container;
 import org.example.dao.MemberDao;
 import org.example.dto.Member;
@@ -8,7 +7,7 @@ import org.example.dto.Member;
 public class MemberService {
     private MemberDao memberDao;
 
-    public MemberService(){
+    public MemberService() {
         memberDao = Container.memberDao;
     }
 
@@ -16,8 +15,9 @@ public class MemberService {
         Member member = new Member(loginId, loginPw, name);
         return memberDao.join(member);
     }
+
     public Member getMemberByLoginId(String loginId) {
-        return  memberDao.getMemberByLoginId(loginId);
+        return memberDao.getMemberByLoginId(loginId);
     }
 
     public Member getMember(int memberId) {

@@ -9,8 +9,7 @@ import java.util.Map;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Board extends Dto{
-
+public class Board extends Dto {
     private String name;
     private String code;
 
